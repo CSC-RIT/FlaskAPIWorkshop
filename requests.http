@@ -1,0 +1,16 @@
+### Welcome message
+GET http://localhost:5000/
+
+### Get all rooms
+GET http://localhost:5000/rooms
+
+### Get a specific room
+GET http://localhost:5000/rooms/1
+
+### Create a new room
+POST http://localhost:5000/rooms
+Content-Type: application/json
+
+{
+    "name": "Kitchen"
+}
