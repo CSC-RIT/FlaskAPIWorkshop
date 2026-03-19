@@ -29,7 +29,7 @@ def create_device():
     req = request.get_json()
 
     if not req or 'name' not in req or 'status' not in req or 'room_id' not in req:
-        return jsonify({'error': 'request missing "name", "status", and/or "room_id" fields'})
+        return jsonify({'error': 'request missing "name", "status", and/or "room_id" fields'}), 400
 
     # verify that the room_id exists in our database
     found = False
@@ -39,7 +39,7 @@ def create_device():
             break
 
     if not found:
-        return jsonify({'error': f'room with id {req['room_id']} not found'})
+        return jsonify({'error': f'room with id {req["room_id"]} not found'}), 400
 
     # create a dictionary of the new device, with a unique id
     new_device = {
@@ -62,7 +62,7 @@ def update_device_status(device_id):
     req = request.get_json()
 
     if not req or 'status' not in req:
-        return jsonify({'error': 'request missing "status" field'})
+        return jsonify({'error': 'request missing "status" field'}), 400
 
     # verify that the device with device_id exists in our dictionary
     device = None
@@ -72,7 +72,7 @@ def update_device_status(device_id):
             break
     
     if not device:
-        return jsonify({'error': f'device with id {device_id} not found'})
+        return jsonify({'error': f'device with id {device_id} not found'}), 400
 
     # update the device status with the given status
     device['status'] = req['status']
@@ -90,7 +90,7 @@ def delete_device(device_id):
             break
 
     if not device:
-        return jsonify({'error': f'device with id {device_id} not found'})
+        return jsonify({'error': f'device with id {device_id} not found'}), 404
 
     # remove the device from the db, can be done by:
     # - .remove on the devices list (with the entire dictionary object)
