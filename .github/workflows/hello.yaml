@@ -4,14 +4,6 @@ on:
   push:
     branches:
     - main
-  
-  workflow_dispatch:
-    inputs:
-      name:
-        description: "The name to greet"
-        required: false
-        default: "World"
-        type: string
 
 jobs:
   hello:
@@ -19,4 +11,4 @@ jobs:
 
     steps:
     - name: Hello
-      run: echo "Hello ${{ inputs.name }}"
+      run: echo "Hello World!"
